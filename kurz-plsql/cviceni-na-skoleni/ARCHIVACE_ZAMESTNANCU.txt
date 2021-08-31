@@ -1,0 +1,18 @@
+CREATE TABLE zamestnanci_archiv
+  (
+    jmeno          VARCHAR(255) NOT NULL,
+    prijmeni       VARCHAR(255) NOT NULL,
+    zamestnanec_id number not null,
+    datum_ukonceni DATE NOT NULL
+  );
+alter table zamestnanci_archiv add constraint zamestnanci_archiv_pk primary key (zamestnanec_id);
+
+
+alter table zamestnanec add archivovan char(1) default 'n' not null;
+alter table zamestnanec add constraint check_archivovan check (archivovan in ('y', 'n'));
+
+
+archivuj_zamestnance:
+
+1. získat zamìstnance, kteøí nejsou archivováni, ale mají vyplnìné datum ukonèení prac. pomìru a tyto zamìstnance uložit do zamìstnanci_archiv
+2. v tabulce zamìstnanec pro novì archivované zamìstnance nastavíme sloupec archivovan = 'y'
